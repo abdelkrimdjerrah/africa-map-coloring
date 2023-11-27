@@ -1,24 +1,68 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import { solve } from './Algorithm';
+import {
+  ComposableMap,
+  Geographies,
+  Geography,
+  Graticule
+} from "react-simple-maps";
+import features from './features.json'
+
+interface Colors {
+  [key: number]: string;
+}
 
 function App() {
+
+  const data = solve();
+
+  const colors:Colors = {
+    1: "#ff0000",
+    2: "#00ff00",
+    3: "#0000ff",
+    4: "#ffff00",
+    5: "#00ffff",
+    6: "#ff00ff",
+    7: "#ffffff",
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='overscroll-none h-screen overflow-hidden'>
+      <div className='flex flex-col gap-2 absolute top-10 left-10'>
+        <div className='flex gap-2'>
+          <div className='text-2xl'>Number of colors used:</div>
+          <div className='text-2xl font-bold'>{data.numberOfColors}</div>
+        </div>
+        <div className='flex gap-2'>
+          <div className='text-2xl'>Number of countries:</div>
+          <div className='text-2xl font-bold'>{Object.keys(data.coloration).length}</div>
+        </div>
+      </div>
+      <ComposableMap
+        projectionConfig={{
+          rotate: [-10, 16, 0],
+          scale: 250
+        }}
+      >
+        <Graticule stroke="#E4E5E6" strokeWidth={0.5} />
+          <Geographies geography={features}>
+            {({ geographies }) =>
+              geographies.map((geo) => {
+                const country = geo.properties.name;
+                const colorKey: number = data.coloration[country];
+                const color:string = colors[colorKey];
+                
+                return (
+                  <Geography
+                    key={geo.rsmKey}
+                    geography={geo}
+                    fill={ color ? color : "#F5F4F6"}
+                  />
+                );
+              })
+            }
+          </Geographies>
+      </ComposableMap>
     </div>
   );
 }
