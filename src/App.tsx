@@ -17,10 +17,10 @@ function App() {
   const data = solve();
 
   const colors:Colors = {
-    1: "#ff0000",
-    2: "#00ff00",
-    3: "#0000ff",
-    4: "#ffff00",
+    1: "#CBB29E",
+    2: "#809A91",
+    3: "#F7EAE1",
+    4: "#C3DDDC",
     5: "#00ffff",
     6: "#ff00ff",
     7: "#ffffff",
