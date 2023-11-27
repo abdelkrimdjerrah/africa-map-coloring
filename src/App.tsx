@@ -28,14 +28,14 @@ function App() {
 
   return (
     <div className='overscroll-none h-screen overflow-hidden'>
-      <div className='flex flex-col gap-2 absolute top-10 left-10'>
-        <div className='flex gap-2'>
-          <div className='text-2xl'>Number of colors used:</div>
-          <div className='text-2xl font-bold'>{data.numberOfColors}</div>
+      <div className='flex flex-col gap-2 absolute bottom-10 text-lg md:text-2xl md:top-10 left-10'>
+        <div className='flex gap-1 md:gap-2'>
+          <div className=''>Number of colors used:</div>
+          <div className='font-bold'>{data.numberOfColors}</div>
         </div>
-        <div className='flex gap-2'>
-          <div className='text-2xl'>Number of countries:</div>
-          <div className='text-2xl font-bold'>{Object.keys(data.coloration).length}</div>
+        <div className='flex gap-1 md:gap-2'>
+          <div className=''>Number of countries:</div>
+          <div className=' font-bold'>{Object.keys(data.coloration).length}</div>
         </div>
       </div>
       <ComposableMap
