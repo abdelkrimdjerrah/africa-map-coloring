@@ -20,8 +20,6 @@ const african_countries_neighbors:any = {
     "Senegal" : ["Gambia", "Guinea", "Guinea-Bissau", "Mali", "Mauritania"],
     "Gambia" : ["Senegal"],
     "Mauritania" : ["Mali", "Senegal", "Western Sahara"],
-    "Western Sahara" : ["Algeria", "Mauritania", "Morocco"],
-    "Morocco" : ["Algeria", "Mauritania", "Spain"],
     "Algeria" : ["Libya", "Mali", "Mauritania", "Morocco", "Niger", "Tunisia", "Western Sahara"],
     "Libya" : ["Algeria", "Chad", "Egypt", "Niger", "Sudan", "Tunisia"],
     "Chad" : ["Cameroon", "Central African Republic", "Libya", "Niger", "Nigeria", "Sudan"],
@@ -63,6 +61,8 @@ const african_countries_neighbors:any = {
     "Republic of Congo" : ["Angola", "Congo"],
     "Zanzibar" : ["Tanzania"],
     "Mayotte" : ["Comoros"],
+    "Morocco" : ["Algeria", "Mauritania"],
+    "Western Sahara" : ["Algeria", "Mauritania", "Morocco"],
   }
 
   const african_countries: string[] = Object.keys(african_countries_neighbors);
@@ -70,7 +70,7 @@ const african_countries_neighbors:any = {
   
   const isSafe = (country: string, color: number, assignment: Assignment): boolean => {
       for (let neighbor of african_countries_neighbors[country]) {
-          if (assignment[neighbor] === color) {
+          if (assignment[neighbor] == color) {
               return false;
           }
       }
@@ -88,6 +88,11 @@ const african_countries_neighbors:any = {
               assignment[country] = color;
               let result = backtracking(assignment);
               if (result !== null) {
+                  if(country == "Morocco"){
+                    console.log("Morocco"  + assignment["Morocco"])
+                    console.log("sahara" + assignment["Western Sahara"])
+                    console.log(isSafe(country, color, assignment))
+                  }
                   return result;
               }
               delete assignment[country];
