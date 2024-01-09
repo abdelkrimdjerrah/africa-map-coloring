@@ -88,11 +88,6 @@ const african_countries_neighbors:any = {
               assignment[country] = color;
               let result = backtracking(assignment);
               if (result !== null) {
-                  if(country == "Morocco"){
-                    console.log("Morocco"  + assignment["Morocco"])
-                    console.log("sahara" + assignment["Western Sahara"])
-                    console.log(isSafe(country, color, assignment))
-                  }
                   return result;
               }
               delete assignment[country];
@@ -104,6 +99,8 @@ const african_countries_neighbors:any = {
   export const solve = (): { coloration: Assignment, numberOfColors: number } => {
       let assignment: Assignment = {};
       let result: Assignment | null = backtracking(assignment);
+
+      
       while (result === null) {
           colors.push(colors[colors.length - 1] + 1);
           result = backtracking(assignment);
